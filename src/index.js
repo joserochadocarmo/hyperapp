@@ -569,6 +569,8 @@ export function app(props) {
       } else {
         obj[1][0](obj[1][1], dispatch, setState(obj[0]))
       }
+    } else if(obj instanceof Promise){
+      obj.then(data =>dispatch(data))
     } else {
       setState(obj)
     }
