@@ -99,8 +99,8 @@ var createElement = function(node, lifecycle, eventProxy, isSvg) {
     node.type === TEXT_NODE
       ? document.createTextNode(node.name)
       : (isSvg = isSvg || node.name === "svg")
-        ? document.createElementNS(SVG_NS, node.name)
-        : document.createElement(node.name)
+      ? document.createElementNS(SVG_NS, node.name)
+      : document.createElement(node.name)
 
   var props = node.props
   if (props.onCreate) {
@@ -482,7 +482,7 @@ export var h = function(name, props) {
 }
 
 var cancel = function(sub) {
-  sub[1][2]()
+  sub[2]()
 }
 
 var isSameValue = function(a, b) {
@@ -530,8 +530,8 @@ var refresh = function(sub, oldSub, dispatch) {
           ? restart(cSub, pSub, dispatch)
           : start(cSub, dispatch)
         : pSub
-          ? cancel(pSub)
-          : pSub
+        ? cancel(pSub)
+        : pSub
     )
   }
 
@@ -569,8 +569,8 @@ export function app(props) {
       } else {
         obj[1][0](obj[1][1], dispatch, setState(obj[0]))
       }
-    } else if(obj instanceof Promise){
-      obj.then(data =>dispatch(data))
+    } else if (obj instanceof Promise) {
+      obj.then(data => dispatch(data))
     } else {
       setState(obj)
     }
